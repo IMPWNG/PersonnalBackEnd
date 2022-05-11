@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 
 const TaskSchema = new mongoose.Schema({
-    name: String, completed: Boolean
+    name: String, 
+    completed: Boolean
 });
 
-export default mongoose.model("Task", TaskSchema);
+module.exports = mongoose.model("Task", TaskSchema);

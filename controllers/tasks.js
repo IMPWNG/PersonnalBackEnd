@@ -39,7 +39,7 @@ const updateTask = async (req, res) => {
     if (!task) {
       return res.status(404).json({ msg: `No Task with ID : ${taskID}` });
     } else {
-      res.status(200).json({ msg: `Task ID : ${taskID} updated` });
+      res.status(200).json({ task });
     };
   } catch (error) {
     res.status(500).json({ msg: error });
@@ -59,5 +59,23 @@ const deleteTask = async (req, res) => {
     res.status(500).json({ msg: error });
   }
 };
+
+// const editTask = async (req, res) => {
+//   try {
+//     const { id: taskID } = req.params;
+//     const task = await Task.findOneAndUpdate({ _id: taskID }, req.body, {
+//       new: true,
+//       runValidators: true,
+//       overwrite: true
+//     });
+//     if (!task) {
+//       return res.status(404).json({ msg: `No Task with ID : ${taskID}` });
+//     } else {
+//       res.status(200).json({ task });
+//     }
+//   } catch (error) {
+//     res.status(500).json({ msg: error });
+//   }
+// };
 
 export { getAllTasks, createTask, getTask, updateTask, deleteTask }; // ES6 syntax 

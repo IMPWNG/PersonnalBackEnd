@@ -1,15 +1,17 @@
 import mongoose from "mongoose";
 
 const taskSchema = new mongoose.Schema({
-    title: {
+    name: {
         type: String,
-        // required: true,
-        completed: Boolean
+        required: true,
+        trim: true,
+        maxlength: [50, "Task name cannot be more than 50 characters"],
+        minlength: [3, "Task name cannot be less than 3 characters"],
     },
-    description: {
-        type: String,
-        // required: true
-    }
+    completed: {
+        type: Boolean,
+        default: false
+    },
 });
 
-export default mongoose.model("Task", taskSchema);
+export default mongoose.model("Task", taskSchema); // ES6 syntax -- Export must be mongoose.model

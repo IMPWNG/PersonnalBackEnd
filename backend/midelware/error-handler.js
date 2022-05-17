@@ -1,4 +1,4 @@
-import { CustomAPIError } from "../errors/custom-error.j";
+import CustomAPIError from "../errors/custom-error.js";
 
 const errorHandlerMiddleware = (err, req, res, next) => {
     if (err instanceof CustomAPIError) {
@@ -7,7 +7,7 @@ const errorHandlerMiddleware = (err, req, res, next) => {
         )
     } else {
         return (
-            res.status(500).json({ msg: "Internal Server Error" })
+            res.status(500).json({ msg: "Internal Server Error, please try again" })
         )
     };
 };

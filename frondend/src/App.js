@@ -1,19 +1,32 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
-import SignIn from "./components/Auth/Modals/SignIn";
+import SignUp from "./components/Modals/SignUp";
 
 export default function App() {
   const [showModal, setShowModal] = useState(false);
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    fetch("/home")
+      .then(res =>  {
+        return res.json();
+      })
+      .then((data) => {
+        setData(data);
+      });
+  }, []);
 
   return (
     <>
+    <div>
+      {data.name}
+    </div>
       <button
         className="rounded-full border-2 border-gray-600 p-2"
         type="button"
         onClick={() => setShowModal(true)}
       >
-        Sign In
+        Sign Up
       </button>
       {showModal ? (
         <div className="fixed inset-0 z-50 overflow-hidden">
@@ -35,7 +48,7 @@ export default function App() {
                     </svg>
                   </button>
                 </div>
-                <SignIn />
+                <SignUp />
               </div>
             </div>
           </div>

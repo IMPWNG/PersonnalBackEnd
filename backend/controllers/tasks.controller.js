@@ -1,4 +1,4 @@
-import Task from "../models/Task.js"; // ES6 syntax
+import Task from "../models/Task.model.js"; // ES6 syntax
 import asyncWrapper from "../midelware/async.js";
 import createCustomError from "../midelware/error-handler.js";
 

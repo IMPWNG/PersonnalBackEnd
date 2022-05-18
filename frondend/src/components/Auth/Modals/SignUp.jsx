@@ -7,23 +7,23 @@ export default function SignUp() {
 
  
 
-    // useEffect(() => {
-    //   fetch("/api/register", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json"
-    //     },
-    //     body: JSON.stringify({
-    //       username,
-    //       password,
-    //       email
-    //     })
-    //   })
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     console.log(data);
-    //   }, [])
-    // });
+    useEffect(() => {
+      fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          username,
+          password,
+          email
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+      }, [])
+    });
 
 
   

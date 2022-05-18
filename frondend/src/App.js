@@ -26,9 +26,6 @@ export default function App() {
       >
         Sign Up
       </button>
-      <form action="/" method="post" className="form">
-        <button type="submit">Connected?</button>
-      </form>
       {showModal ? (
         <div className="fixed inset-0 z-50 overflow-hidden">
           <div className="flex items-center justify-center min-h-screen bg-gray-500">

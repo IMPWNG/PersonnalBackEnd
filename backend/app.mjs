@@ -12,23 +12,20 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 // Middleware
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
 // app.use(cors());
 // app.use(express.static("./public")); 
 // app.use(express.json());
 
 // Simple Routes
 
-app.get("/home", (req, res) => {
-  res.json({
-    name: "Welcome to your personnal backend",
-  });
+app.post("/", (req, res) => {
+  console.log("Connected to react");
+  res.send("Connected to react");
 });
 
-app.post("/home", (req, res) => {
-  console.log(req.body);
-});
+
 
 
 // app.use("/api/v1/tasks", tasks);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import SignUp from "./components/Modals/SignUp";
+import SignUp from "./components/Auth/Modals/SignUp";
 
 export default function App() {
   const [showModal, setShowModal] = useState(false);
@@ -18,9 +18,7 @@ export default function App() {
 
   return (
     <>
-    <div>
-      {data.name}
-    </div>
+      <div>{data.name}</div>
       <button
         className="rounded-full border-2 border-gray-600 p-2"
         type="button"
@@ -28,6 +26,9 @@ export default function App() {
       >
         Sign Up
       </button>
+      <form action="/" method="post" className="form">
+        <button type="submit">Connected?</button>
+      </form>
       {showModal ? (
         <div className="fixed inset-0 z-50 overflow-hidden">
           <div className="flex items-center justify-center min-h-screen bg-gray-500">

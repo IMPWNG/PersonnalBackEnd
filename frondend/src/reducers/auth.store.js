@@ -1,4 +1,4 @@
-import * as actionType from "../constants/actionType";
+import * as actionType from "../constants/actionTypes";
 
 export default function authReducer(state = { authData: null}, action) {
     switch (action.type) {

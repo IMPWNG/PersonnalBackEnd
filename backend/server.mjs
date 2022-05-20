@@ -1,8 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
 
 import connectDB from "./db/connect.js";
 
@@ -14,13 +12,13 @@ import auth from "./routes/Auth.route.js";
 import { config } from "dotenv";
 config({ path: config.env });
 
-import User from "./models/User.model.js";
+// import User from "./models/User.model.js";
 
 // Auth Routes
 
 
 // Tasks manager //
-// import tasks from "./routes/tasks.js"; // Need extension to import from a folder
+// import tasks from "./routes/tasks.route.js"; // Need extension to import from a folder
 
 const app = express();
 const PORT = process.env.PORT || 8080;

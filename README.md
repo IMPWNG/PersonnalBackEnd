@@ -2,5 +2,10 @@
 
 ## TODO 
 
-- Auth -> Admin account 
-- Dashboard -> Task, Project
+- Auth 
+  - Add to mongooseDB collection  
+
+
+- FrontEnd : 
+  - SideBar nav
+  - 

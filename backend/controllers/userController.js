@@ -2,6 +2,9 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/userModel.js";
 
+import { config } from "dotenv";
+config({ path: config.env });
+
 const JWT_SECRET = process.env.JWT_SECRET;
 
 // @desc    Register new user

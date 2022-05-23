@@ -11,7 +11,6 @@ import tasks from "./routes/taskRoute.js";
 
 import userModel from "./models/userModel.js";
 
-
 import { config } from "dotenv";
 config({ path: config.env });
 
@@ -25,19 +24,12 @@ mongoose.connect(
 );
 
 
-
-
 // Middleware to receive form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/api/v1/tasks", tasks);
 app.use(express.static("./public")); 
 app.use("/api/v1/users", users);
-
-
-
-
-
 
 
 // Serve frontend

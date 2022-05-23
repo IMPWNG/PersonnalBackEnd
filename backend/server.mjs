@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import notFount from "./middelware/not-found.js";
 import errorHandler from "./middelware/error-handler.js";
@@ -23,19 +22,39 @@ mongoose.connect(
   }
 );
 
-app.listen(process.env.PORT || 8080, () => {
-  console.log("Listening");
-});
 
-app.use("/api/v1/tasks", tasks);
+
 
 // Middleware to receive form data
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json(), cors());
-app.use(express.static("./public")); 
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use("/api/v1/tasks", tasks);
+app.use(express.static("./public")); 
+
+
+
+
+
+
+
+// // Serve frontend
+// if (process.env.NODE_ENV === 'production') {
+//   app.use(express.static(path.join(__dirname, '../frontend/build')))
+
+//   app.get('*', (req, res) =>
+//     res.sendFile(
+//       path.resolve(__dirname, '../', 'frontend', 'build', 'index.html')
+//     )
+//   )
+// } else {
+//   app.get('/', (req, res) => res.send('Please set to production'))
+// }
+
+
+
 app.use(notFount);
 app.use(errorHandler);
 
-
-
+app.listen(PORT || 8080, () => {
+  console.log("Server started on port 8080");
+});

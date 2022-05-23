@@ -1,53 +1,41 @@
 import express from "express";
-import bodyParser from "body-parser";
 import cors from "cors";
+import bodyParser from "body-parser";
+import mongoose from "mongoose";
+import notFount from "./middelware/not-found.js";
+import errorHandler from "./middelware/error-handler.js";
+const app = express();
+const PORT = process.env.PORT || 8080;
 
-import connectDB from "./db/connect.js";
-
-import notFount from "./midelware/not-found.js";
-import errorHandler from "./midelware/error-handler.js";
-
-import auth from "./routes/Auth.route.js";
+import auhRoute from "./routes/authRoute.js";
+import userModel from "./models/userModel.js";
+import tasks from "./routes/taskRoute.js";
 
 import { config } from "dotenv";
 config({ path: config.env });
 
-// import User from "./models/User.model.js";
+// Connect to MongoDB
+mongoose.connect(
+  process.env.NODE_APP_DB_CONNECTION_CDR,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  () => {
+    console.log("MongoDB connected");
+  }
+);
 
-// Auth Routes
+app.listen(process.env.PORT || 8080, () => {
+  console.log("Listening");
+});
 
-
-// Tasks manager //
-// import tasks from "./routes/tasks.route.js"; // Need extension to import from a folder
-
-const app = express();
-const PORT = process.env.PORT || 8080;
+app.use("/api/v1/tasks", tasks);
 
 // Middleware to receive form data
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json(), cors());
-
-// app.use(express.static("./public")); 
-// app.use(express.json());
-
-// Simple Routes
-
-app.use('/api/auth', auth);
-
-// app.use("/api/v1/tasks", tasks);
-
+app.use(express.static("./public")); 
+app.use(express.json());
 app.use(notFount);
 app.use(errorHandler);
 
-const start = async () => {
-  try {
-    connectDB();
-    // Start Server
-    app.listen(PORT, console.log(`Listening on port ${PORT}...`));
-  } catch (error) {
-    console.log(error);
-  }
-};
 
-start();
 

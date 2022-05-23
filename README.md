@@ -13,3 +13,8 @@
   - Task manager dashboard
   - View project pages
  
+ 
+ 
+ ## FIXES
+ - BackEnd: 
+  - Auth: auth routes + clean auth controller

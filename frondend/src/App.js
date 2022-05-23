@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import SignUp from "./components/Auth/Auth.modal";
+import SignUp from "./components/Auth/authModal";
 
 export default function App() {
   const [showModal, setShowModal] = useState(false);

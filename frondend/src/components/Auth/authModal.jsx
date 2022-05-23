@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "@reach/router";
 
-import { signup, signin } from "../../actions/Auth.action";
+import { signup, signin } from "../../helpers/authHelper";
 
 
 const initialState = {
@@ -15,8 +15,8 @@ const initialState = {
 export default function SignUp() {
   const [form, setFrom] = useState(initialState);
   const [isSignup, setIsSignup] = useState(false);
-  const dispatch = useDispatch();
-  const history = useNavigate();
+  // const dispatch = useDispatch();
+  // const history = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => setShowPassword(!showPassword);
@@ -27,15 +27,15 @@ export default function SignUp() {
     setShowPassword(false);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
 
-    if (isSignup) {
-      dispatch(signup(form, history));
-    } else {
-      dispatch(signin(form, history));
-    }
-  };
+  //   if (isSignup) {
+  //     dispatch(signup(form, history));
+  //   } else {
+  //     dispatch(signin(form, history));
+  //   }
+  // };
 
   const handleChange = (e) => {
     setFrom({ ...form, [e.target.name]: e.target.value });
@@ -49,7 +49,7 @@ export default function SignUp() {
             {isSignup ? "Sign up" : "Sign in"}
           </h2>
         </div>
-        <form className="mt-8 space-y-6 flex flex-col" onSubmit={handleSubmit}>
+        <form className="mt-8 space-y-6 flex flex-col" >
           {isSignup && (
             <>
               <input

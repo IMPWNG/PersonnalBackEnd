@@ -1,9 +1,16 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
-import SignUp from "./components/Auth/registerModal";
+import Login from "./components/Auth/loginModal";
+import Register from "./components/Auth/registerModal";
 
 export default function App() {
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+
   return (
     <>
       <div className="grid place-items-center h-screen bg-black">
@@ -14,7 +21,15 @@ export default function App() {
         >
           <span className="w-48 h-48 rounded rotate-[-40deg] bg-gradient-to-r from-green-400 to-blue-500 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
           <span className="relative w-full text-left text-black transition-colors duration-300 ease-in-out group-hover:text-white">
-            Login
+            {user ? (
+              <span className="text-black">
+                <p>Login</p>
+              </span>
+            ) : (
+              <span className="text-black">
+                <p>Register</p>
+              </span>
+            )}
           </span>
         </button>
       </div>
@@ -38,7 +53,12 @@ export default function App() {
                     </svg>
                   </button>
                 </div>
-                <SignUp />
+                {/* Show login modal if user already logged in else show register modal */}
+                {user ? (
+                  <Login />
+                ) : (
+                  <Register />
+                )}
               </div>
             </div>
           </div>

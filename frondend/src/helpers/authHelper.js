@@ -19,7 +19,7 @@ const register = async (userData) => {
 // Login user
 
 const login = async (userData) => {
-    const response = await axios.post(API_URL + 'login', userData);
+    const response = await axios.post(API_URL, userData);
 
     if (response.data) {
         return (

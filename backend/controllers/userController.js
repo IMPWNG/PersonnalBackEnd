@@ -8,7 +8,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 // @route   POST /api/users
 // @access  Public
 
-export default async function registerUser(req, res) {
+const registerUser = async (req, res) => {
   const { username, password, email } = req.body;
 
   if (!username || !password || !email) {
@@ -58,7 +58,7 @@ export default async function registerUser(req, res) {
 // @desc    Get user data
 // @route   GET /api/users/me
 // @access  Private
-export async function getMe(req, res) {
+const getMe = async (req, res) => {
   res.status(200).json(req.user)
 }
 
@@ -68,3 +68,5 @@ const generateToken = (id) => {
     expiresIn: '30d',
   })
 }
+
+export { registerUser, getMe };

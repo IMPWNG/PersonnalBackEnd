@@ -1,6 +1,6 @@
 import Task from "../models/taskModel.js"; // ES6 syntax
 // import asyncWrapper from "../middelware/async.js";
-import createCustomError from "../middelware/error-handler.js";
+import createCustomError from "../middleware/error-handler.js";
 
 const getAllTasks = async (req, res) => {
   try {
@@ -27,7 +27,7 @@ const createTask = async (req, res) => {
 
 const getTask = async (req, res, next) => {
   try {
-    const { id: taskID } = req.params.id;
+    const { id: taskID } = req.params;
     const task = await Task.findOne({ _id: taskID });
     if (!task) {
       return next(createCustomError(`No Task with ID : ${taskID}`, 404));
@@ -41,7 +41,7 @@ const getTask = async (req, res, next) => {
 
 const updateTask = async (req, res) => {
   try {
-    const { id: taskID } = req.params.id;
+    const { id: taskID } = req.params;
     const task = await Task.findOneAndUpdate({ _id: taskID }, req.body, {
       new: true,
     });
@@ -57,7 +57,7 @@ const updateTask = async (req, res) => {
 
 const deleteTask = async (req, res) => {
   try {
-    const { id: taskID } = req.params.id;
+    const { id: taskID } = req.params;
     const task = await Task.findOneAndDelete({ _id: taskID });
     if (!task) {
       return next(createCustomError(`No Task with ID : ${taskID}`, 404));

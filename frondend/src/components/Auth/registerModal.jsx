@@ -15,7 +15,7 @@ export default function Register() {
     confirmPassword: "",
   });
 
-  const { username, password, email, confirmPassword } = formData;
+  const { username, password, email } = formData;
   
   const nagivate = useNavigate();
   const dispatch = useDispatch();

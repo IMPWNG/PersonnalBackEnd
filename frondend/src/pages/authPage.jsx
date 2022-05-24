@@ -1,21 +1,15 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 
-import Login from "../components/Modals/loginModal";
-import Register from "../components/Modals/registerModal";
+import Login from "./Modals/loginModal";
+import Register from "./Modals/registerModal";
 
 export default function Auth() {
   const [loginShowModal, setLoginShowModal] = useState(false);
   const [registerShowModal, setRegisterShowModal] = useState(false);
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-
   return (
     <>
-      <div className="grid place-items-center h-screen bg-black">
+      <div className="flex flex-row min-h-screen justify-center items-center space-x-5 bg-black">
         <button
           className="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-white rounded hover:bg-white group"
           type="button"
@@ -28,7 +22,6 @@ export default function Auth() {
             </span>
           </span>
         </button>
-        {/* Create a register button below the login button */}
         <button
           className="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-white rounded hover:bg-white group"
           type="button"
@@ -100,8 +93,6 @@ export default function Auth() {
           </div>
         </div>
       ) : null}
-
-
     </>
   );
 }

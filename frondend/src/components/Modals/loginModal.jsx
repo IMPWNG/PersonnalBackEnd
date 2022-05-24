@@ -26,7 +26,7 @@ export default function Login() {
     }
 
     if (isSuccess || user) {
-      nagivate("/dashboard");
+      nagivate("/");
     }
 
     dispatch(reset());

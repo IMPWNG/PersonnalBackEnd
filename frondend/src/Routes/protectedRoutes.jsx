@@ -1,18 +1,17 @@
-import react, { useContext, useState, useEffect } from "react";
-import { Outlet, useNavigate, useLocation, Navigate } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
-import Login from "../components/Modals/loginModal";
 
 
 export default function ProtectedRoutes() {
-
-  const { user } = useSelector((state) => state.user);
-
-
-  return (
+  const user = useSelector((state) => state.user);
+  const loading = useSelector((state) => state.loading);
+  
+  if (loading) {
+    return <h1>Loading...</h1>;
+  } else if (!user) {
     <>
       <Outlet /> : <Navigate to="/dashboard" />
-    </>
-  );
+    </>;
+    
+  }
 }

@@ -1,27 +1,63 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import Login from "./Modals/loginModal";
 import Register from "./Modals/registerModal";
+
+import { logout, reset } from "../helpers/authSliceHelper";	
 
 export default function Auth() {
   const [loginShowModal, setLoginShowModal] = useState(false);
   const [registerShowModal, setRegisterShowModal] = useState(false);
 
+  const { user, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+    const nagivate = useNavigate();
+    const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    if (isSuccess || user) {
+      nagivate("/");
+    }
+
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, nagivate, dispatch]);
+
   return (
     <>
       <div className="flex flex-row min-h-screen justify-center items-center space-x-5 bg-black">
-        <button
-          className="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-white rounded hover:bg-white group"
-          type="button"
-          onClick={() => setLoginShowModal(true)}
-        >
-          <span className="w-48 h-48 rounded rotate-[-40deg] bg-gradient-to-r from-green-400 to-blue-500 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
-          <span className="relative w-full text-left text-black transition-colors duration-300 ease-in-out group-hover:text-white">
-            <span className="text-black">
-              <p>Login</p>
-            </span>
-          </span>
-        </button>
+        {user ? (
+          <>
+            <div className="text-red-500">
+              <h1>Welcome back, {user.username}</h1>
+            </div>
+            <button className="text-red-500" onClick={() => dispatch(logout())}>
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              className="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-white rounded hover:bg-white group"
+              type="button"
+              onClick={() => setLoginShowModal(true)}
+            >
+              <span className="w-48 h-48 rounded rotate-[-40deg] bg-gradient-to-r from-green-400 to-blue-500 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
+              <span className="relative w-full text-left text-black transition-colors duration-300 ease-in-out group-hover:text-white">
+                <span className="text-black">
+                  <p>Login</p>
+                </span>
+              </span>
+            </button>
+          </>
+        )}
         <button
           className="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-white rounded hover:bg-white group"
           type="button"

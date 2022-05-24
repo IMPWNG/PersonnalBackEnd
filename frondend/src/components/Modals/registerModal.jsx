@@ -46,16 +46,6 @@ export default function Register() {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    // if (password !== confirmPassword) {
-    //   toast.error("Passwords do not match");
-    // } else {
-    //   const useData = {
-    //     username,
-    //     email,
-    //     password,
-    //   }
-    //   dispatch(register(useData));
-    // }
      const userData = {
         username,
         email,

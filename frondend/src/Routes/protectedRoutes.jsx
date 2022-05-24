@@ -1,10 +1,11 @@
 import react, { useContext, useState } from "react";
 import { Outlet, Navigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-import Login from "../pages/Modals/loginModal";
+import Login from "../components/Modals/loginModal";
 
 const useAuth = () => {
-  const { user } = { loggedIn: false };
+  const { user } = { loggedIn: true };
   return user && user.loggedIn;
 };
 

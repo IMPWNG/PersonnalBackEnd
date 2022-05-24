@@ -19,7 +19,6 @@ const protect = async (req, res, next) => {
 
         } catch (err) {
         return res.status(401).json({ message: "Auth failed" });
-        console.log(err);
         }
     }
 

@@ -58,6 +58,28 @@ const registerUser = async (req, res) => {
   }
 }
 
+// @desc    Authenticate a user
+// @route   POST /api/users/login
+// @access  Public
+
+const loginUser = async (req, res) => {
+  const { username, password } = req.body
+
+  // Check for username
+  const user = await User.findOne({ username });
+
+  if (user && (await bcrypt.compare(password, user.password))) {
+    res.json({
+      _id: user.id,
+      name: user.name,
+      username: user.username,
+      token: generateToken(user._id),
+    });
+  } else {
+    res.status(400).json({ message: "Invalid credentials" });
+  }
+};
+
 // @desc    Get user data
 // @route   GET /api/users/me
 // @access  Private
@@ -72,4 +94,4 @@ const generateToken = (id) => {
   })
 }
 
-export { registerUser, getMe };
+export { registerUser, loginUser, getMe };

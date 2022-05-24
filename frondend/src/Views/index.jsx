@@ -1,18 +1,20 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 
 import Auth from "../pages/authPage";
+import ProtectedRoutes from "../Routes/protectedRoutes";
 import Dashboard from "../pages/dashboard";
-// import Login from "../pages/Modals/loginModal";
-// import Register from "../pages/Modals/registerModal";
-// import ErrorPage from "../pages/errorPage";
+
+import ErrorPage from "../pages/errorPage";
 
 export default function Views() {
   return (
     <Routes>
-      <Route index element={<Auth />} />
-      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/" element={<Auth />} />
+      <Route element={<ProtectedRoutes />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Route>
+      <Route path="*" element={<ErrorPage />} />
     </Routes>
   );
 }
-

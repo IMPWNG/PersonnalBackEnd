@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 
@@ -17,7 +17,7 @@ export default function Register() {
 
   const { username, password, email } = formData;
   
-  const nagivate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { user, isLoading, isError, isSuccess, message } = useSelector(
@@ -30,11 +30,11 @@ export default function Register() {
     }
 
     if (isSuccess || user) {
-      nagivate("/");
+      navigate("/");
     }
 
     dispatch(reset());
-  }, [user, isError, isSuccess, message, nagivate, dispatch]);
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { login, reset, logout } from "../../helpers/authSliceHelper";
+import { login, reset } from "../../helpers/authSliceHelper";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -13,9 +13,8 @@ export default function Login() {
 
   const { username, password } = formData;
 
-  const nagivate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const location = useLocation();
 
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
@@ -27,11 +26,11 @@ export default function Login() {
     }
 
     if (isSuccess || user) {
-      nagivate("/");
+      navigate("/dashbard");
     }
 
     dispatch(reset());
-  }, [user, isError, isSuccess, message, nagivate, dispatch]);
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -49,6 +48,7 @@ export default function Login() {
     };
 
     dispatch(login(userData));
+    
 
   };
 
@@ -84,11 +84,6 @@ export default function Login() {
             className="px-4 py-3 mt-4 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
           />
           <button
-            // onClick={() => {
-            //   if (location.state?.from) {
-            //     nagivate(location.state.from);
-            //   }
-            // }}
             type="submit"
             className="mt-4 px-4 py-3  leading-6 text-base rounded-md border border-transparent text-white bg-blue-500 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex w-full justify-center items-center font-medium focus:outline-none"
           >

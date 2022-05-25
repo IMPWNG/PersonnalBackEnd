@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import Login from "./Modals/loginModal";
 import Register from "./Modals/registerModal";
 
-import { logout, reset } from "../helpers/authSliceHelper";	
+import { reset, logout } from "../helpers/authSliceHelper";	
 
 export default function Auth() {
   const [loginShowModal, setLoginShowModal] = useState(false);
@@ -15,7 +15,7 @@ export default function Auth() {
   const { user, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
-    const nagivate = useNavigate();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,32 +24,45 @@ export default function Auth() {
     }
 
     if (isSuccess || user) {
-      nagivate("/");
+      navigate("/");
     }
 
     dispatch(reset());
-  }, [user, isError, isSuccess, message, nagivate, dispatch]);
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
+
+    const onLogout = () => {
+      dispatch(logout());
+      dispatch(reset());
+      navigate("/");
+    };
 
   return (
     <>
       <div className="flex flex-row min-h-screen justify-center items-center space-x-5 bg-black">
-        {user ? (
-          <>
-            <div className="text-red-500">
-              <h1>Welcome back, {user.username}</h1>
-            </div>
-            <button className="text-red-500" onClick={() => dispatch(logout())}>
-              Logout
-            </button>
-          </>
-        ) : (
+          {user ? (
+            <>
+              <button
+                className="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-white rounded hover:bg-white group"
+                type="button"
+                onClick={onLogout}
+                
+              >
+                <span className="w-48 h-48 rounded rotate-[-40deg] bg-gradient-to-r from-red-200 to-red-500 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
+                <span className="relative w-full text-left text-black transition-colors duration-300 ease-in-out group-hover:text-white">
+                  <span className="text-black">
+                    <p>Logout</p>
+                  </span>
+                </span>
+              </button>
+            </>
+          ) : (
           <>
             <button
               className="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-white rounded hover:bg-white group"
               type="button"
               onClick={() => setLoginShowModal(true)}
             >
-              <span className="w-48 h-48 rounded rotate-[-40deg] bg-gradient-to-r from-green-400 to-blue-500 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
+              <span className="w-48 h-48 rounded rotate-[-40deg] bg-gradient-to-r from-green-400 to-green-500 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
               <span className="relative w-full text-left text-black transition-colors duration-300 ease-in-out group-hover:text-white">
                 <span className="text-black">
                   <p>Login</p>
@@ -57,13 +70,13 @@ export default function Auth() {
               </span>
             </button>
           </>
-        )}
+          )}
         <button
           className="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-white rounded hover:bg-white group"
           type="button"
           onClick={() => setRegisterShowModal(true)}
         >
-          <span className="w-48 h-48 rounded rotate-[-40deg] bg-gradient-to-r from-green-400 to-blue-500 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
+          <span className="w-48 h-48 rounded rotate-[-40deg] bg-gradient-to-r from-green-400 to-green-500 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
           <span className="relative w-full text-left text-black transition-colors duration-300 ease-in-out group-hover:text-white">
             <span className="text-black">
               <p>Register</p>

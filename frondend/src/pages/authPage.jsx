@@ -3,60 +3,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import Login from "./Modals/loginModal";
-import Register from "./Modals/registerModal";
-
-import { reset, logout } from "../helpers/authSliceHelper";	
+import Login from "../components/Modals/loginModal";
+import Register from "../components/Modals/registerModal";
 
 export default function Auth() {
   const [loginShowModal, setLoginShowModal] = useState(false);
   const [registerShowModal, setRegisterShowModal] = useState(false);
 
-  const { user, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
-  );
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (isError) {
-      toast.error(message);
-    }
-
-    if (isSuccess || user) {
-      navigate("/");
-    }
-
-    dispatch(reset());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
-
-    const onLogout = () => {
-      dispatch(logout());
-      dispatch(reset());
-      navigate("/");
-    };
 
   return (
     <>
       <div className="flex flex-row min-h-screen justify-center items-center space-x-5 bg-black">
-          {user ? (
-            <>
-              <button
-                className="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-white rounded hover:bg-white group"
-                type="button"
-                onClick={onLogout}
-                
-              >
-                <span className="w-48 h-48 rounded rotate-[-40deg] bg-gradient-to-r from-red-200 to-red-500 absolute bottom-0 left-0 -translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
-                <span className="relative w-full text-left text-black transition-colors duration-300 ease-in-out group-hover:text-white">
-                  <span className="text-black">
-                    <p>Logout</p>
-                  </span>
-                </span>
-              </button>
-            </>
-          ) : (
-          <>
             <button
               className="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-white rounded hover:bg-white group"
               type="button"
@@ -69,8 +26,7 @@ export default function Auth() {
                 </span>
               </span>
             </button>
-          </>
-          )}
+
         <button
           className="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-white rounded hover:bg-white group"
           type="button"

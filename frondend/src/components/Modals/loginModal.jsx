@@ -6,31 +6,27 @@ import { toast } from "react-toastify";
 import { login, reset } from "../../helpers/authSliceHelper";
 
 export default function Login() {
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-  });
-
-  const { username, password } = formData;
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
-  );
+  const [formData, setFormData] = useState({
+      username: "",
+      password: "",
+    });
+  
+  const { username, password } = formData;
 
-  useEffect(() => {
-    if (isError) {
-      toast.error(message);
-    }
+  const { user, isSucces, isError, message } = useSelector((state) => state.auth);
 
-    if (isSuccess || user) {
-      navigate("/dashbard");
-    }
+      useEffect(() => {
+        if (isError) {
+          toast.error(message);
+        }
+        if (isSucces || user) {
+          navigate("/dashboard");
+        }
+      }, [user, isSucces, isError, message, navigate]);
 
-    dispatch(reset());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -39,22 +35,17 @@ export default function Login() {
     }));
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+    const onSubmit = (e) => {
+      e.preventDefault();
 
-    const userData = {
-      username,
-      password,
+      const userData = {
+        username,
+        password,
+      };
+      dispatch(login(userData))
+      navigate("/dashboard");
+      
     };
-
-    dispatch(login(userData));
-    
-
-  };
-
-  if (isLoading) {
-    return <h1>Loading...</h1>;
-  }
 
   return (
     <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -70,7 +61,6 @@ export default function Login() {
             id="username"
             placeholder="Username"
             type="text"
-            value={username}
             name="username"
             className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
           />
@@ -78,8 +68,7 @@ export default function Login() {
             onChange={onChange}
             id="password"
             placeholder="Password"
-            value={password}
-            type={password ? "text" : "password"}
+            type="password"
             name="password"
             className="px-4 py-3 mt-4 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
           />

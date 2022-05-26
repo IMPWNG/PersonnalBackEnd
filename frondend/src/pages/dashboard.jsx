@@ -10,34 +10,36 @@ export default function Dashboard() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+    useEffect(() => {
+      if (isError) {
+        console.log(message);
+      }
+
+      if (!user) {
+        navigate("/login");
+      }
+
+      return () => {
+        dispatch(reset());
+      };
+    }, [user, isError, message, navigate, dispatch]);
+
   const onLogout = () => {
     dispatch(logout());
     dispatch(reset());
     navigate("/login");
   };
 
-  useEffect(() => {
-    if (isError) {
-     console.log(message);
-    }
-    
-    if (!user) {
-      navigate("/login");
-    }
 
-    return () => {
-      dispatch(reset());
-    }
-  }, [user, isError, message, navigate, dispatch]);
-  
+
   return (
     <>
-      {user ? (
+  
         <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-md w-full space-y-8">
             <div className="text-center">
               <h1 className="text-3xl leading-9 font-extrabold text-gray-900">
-                Welcome {user.username}
+                Welcome {user && user.username}
               </h1>
               <p className="mt-2 text-sm leading-5 text-gray-500">
                 You are logged in!
@@ -52,27 +54,9 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-      ) : (
-        <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-md w-full space-y-8">
-            <div className="text-center">
-              <h1 className="text-3xl leading-9 font-extrabold text-gray-900">
-                Welcome
-              </h1>
-              <p className="mt-2 text-sm leading-5 text-gray-500">
-                You are not logged in!
-              </p>
-              <button
-                className="mt-3 w-full rounded-md shadow-sm"
-                type="button"
-                
-              >
-                Login
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+
+       
+  
     </>
   );
 }

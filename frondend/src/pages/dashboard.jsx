@@ -29,10 +29,8 @@ export default function Dashboard() {
   const onLogout = () => {
     dispatch(logout());
     dispatch(reset());
-    navigate("/login");
+    navigate("/");
   };
-
-
 
   return (
     <>

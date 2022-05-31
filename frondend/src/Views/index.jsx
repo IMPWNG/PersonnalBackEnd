@@ -18,7 +18,7 @@ export default function Views() {
       {/** Wrap all Route under ProtectedRoutes element */}
       <Route path="/" element={<ProtectedRoutes />}>
         <Route path="/" element={<InnerContent />}>
-          <Route path="/" element={<Navigate replace to="dashboard" />} />
+          <Route path="/" element={<Navigate to="/dashboard" />} />
           <Route path="dashboard" element={<Dashboard />} />
         </Route>
       </Route>

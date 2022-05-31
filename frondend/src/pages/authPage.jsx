@@ -40,7 +40,7 @@ export default function Auth() {
           </span>
         </button>
       </div>
-      {loginShowModal ? (
+      {/* {loginShowModal ? ( */}
         <div className="fixed inset-0 z-50 overflow-hidden">
           <div className="flex items-center justify-center min-h-screen bg-gray-500">
             <div className="relative w-full max-w-xs">
@@ -68,7 +68,7 @@ export default function Auth() {
             </div>
           </div>
         </div>
-      ) : null}
+      {/* ) : null}
       {registerShowModal ? (
         <div className="fixed inset-0 z-50 overflow-hidden">
           <div className="flex items-center justify-center min-h-screen bg-gray-500">
@@ -97,7 +97,7 @@ export default function Auth() {
             </div>
           </div>
         </div>
-      ) : null}
+      ) : null} */}
     </>
   );
 }
